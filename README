@@ -1,4 +1,5 @@
-.
+cite : [![DOI](https://zenodo.org/badge/634913347.svg)](https://zenodo.org/badge/latestdoi/634913347).
+
 ├── 1_Preprocessing																				Methods sections: Sequencing, alignment, and generation of count matrices
 │   ├── cellranger_script_new_females.sh														Cellranger submission script for female cohort
 │   ├── cellranger_script_new_males.sh															Cellranger submission script for male cohort
