@@ -1,0 +1,39 @@
+
+## set up parameters
+######################################################################
+
+############     Bootstrap related parameters        #################
+
+######################################################################
+input_seurat: "/home/malosree/scratch/Finalized_merging_normalization/3_harmonized_object.Rds"
+subsample_rate: 0.8
+num_of_subsample: 100
+
+subsample_ks: "20 30"
+
+subsample_resolutions: "0.1 0.3 0.5 0.7 0.9 1.1 1.3 1.5"
+
+## number of PCs to use, pc.use 
+subsample_pcs: "70 80"
+
+######################################################################
+
+############     scclusteval package related parameters   ############
+
+######################################################################
+
+## those are parameters for functions from  Seurat package 
+## preprocessSubsetData is a wrapper.
+
+## you should leave k.param, pc.use and resolution out
+## library(scclusteval)
+## ?PreprocessSubsetData_custom   Will set pc.use to different values and skip JackStraw 
+PreprocessSubsetData_subsample_pars: "num.pc = 100, n.start = 100, nn.eps = 0"
+
+
+CLUSTER_JSON: './cluster.json'
+
+
+
+
+

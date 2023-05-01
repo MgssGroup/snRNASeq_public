@@ -1,0 +1,36 @@
+{
+    "__default__" :
+    {
+        "time" : "00:40:00",
+        "G" : 1,
+        "n": 1,
+        "mem": 4000,
+        "name" : "{rule}.{wildcards}",
+        "output": "sbatch_log/{rule}.{wildcards}.out",
+        "error": "sbatch_log/{rule}.{wildcards}.err"
+    },
+    "full_sample_preprocess":
+    {
+        "time" : "2:00:00",
+        "n" : 8,
+        "mem": "15G"
+    },
+    "subsample_cluster":
+    {
+        "time" : "2:00:00",
+        "n" : 8,
+        "mem": "15G"
+    },
+    "gather_full_sample_preprocess":
+    {
+        "time": "3:00:00",
+        "n": 8,
+        "mem": "15G"
+    },
+    "gather_subsample":
+    {
+        "time": "3:00:00",
+        "n": 8,
+        "mem": "15G"
+    }
+}
