@@ -24,11 +24,9 @@
 │   └── pyflow_seurat_parameter_custom															Files corresponding to the scclusteval Snakemake workflow
 │       ├── cluster.json																		As per scclusteval Snakemake workflow, customized
 │       ├── config.yaml																			As per scclusteval Snakemake workflow, customized
-│       ├── LICENSE																				As per scclusteval Snakemake workflow	
 │       ├── post_snakemake.R																	Custom evaluation of clustering parameters after running the Snakemake workflow
 │       ├── post_snakemake.sh																	Bash submission script for post_snakemake.R
 │       ├── pyflow-scBoot.sh																	As per scclusteval Snakemake workflow, customized
-│       ├── README.md																			As per scclusteval Snakemake workflow
 │       ├── scripts
 │       │   ├── gather_fullsample.R																As per scclusteval Snakemake workflow, customized
 │       │   ├── gather_subsample.R																As per scclusteval Snakemake workflow, customized	
