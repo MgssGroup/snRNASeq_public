@@ -1,0 +1,142 @@
+.
+├── 1_Preprocessing																				Methods sections: Sequencing, alignment, and generation of count matrices
+│   ├── cellranger_script_new_females.sh														Cellranger submission script for female cohort
+│   ├── cellranger_script_new_males.sh															Cellranger submission script for male cohort
+│   ├── combining_metrics.sh																	Script for combining Cellranger output metrics
+│   ├── female_cmdlines_May2021.txt																All commands for running Cellranger on female cohort, combined
+│   ├── male_cmdlines_May2021.txt																All commands for running Cellranger on male cohort, combined
+│   ├── Metrics_stats.R																			Script for running basic stats between groups on metrics
+│   ├── More_metric_stats.R																		Additional script for running basic stats between groups on metrics
+├── 2_Finalized_merging_normalization															Methods sections: Dimensionality reduction and data integration, Clustering 
+│   ├── bash_files																				Contains the bash scripts used to submit R scripts. 
+│   │   ├── Step1.sh
+│   │   ├── Step2.sh
+│   │   ├── Step3.sh
+│   │   ├── Step4.sh
+│   │   └── Step5.sh
+│   ├── Finalized_scripts
+│   │   ├── 1_loading_matrices.R																Load filtered gene barcode matrices for each sample (library), filter cells
+│   │   ├── 2_merge_normalize.R																	Merge all matrices together, log normalize 
+│   │   ├── 3_harmonize.R																		Run PCA, Harmony, test correction for different variables
+│   │   ├── 4_basic_plots.R																		Make basic QC plots 
+│   │   └── 5_reharmonize_seeded.R																Re-run Harmony with a seed set, cluster using optimized parameters from scclusteval
+├── 3_scclusteval_round2																		Methods sections: Clustering 	
+│   └── pyflow_seurat_parameter_custom															Files corresponding to the scclusteval Snakemake workflow
+│       ├── cluster.json																		As per scclusteval Snakemake workflow, customized
+│       ├── config.yaml																			As per scclusteval Snakemake workflow, customized
+│       ├── LICENSE																				As per scclusteval Snakemake workflow	
+│       ├── post_snakemake.R																	Custom evaluation of clustering parameters after running the Snakemake workflow
+│       ├── post_snakemake.sh																	Bash submission script for post_snakemake.R
+│       ├── pyflow-scBoot.sh																	As per scclusteval Snakemake workflow, customized
+│       ├── README.md																			As per scclusteval Snakemake workflow
+│       ├── scripts
+│       │   ├── gather_fullsample.R																As per scclusteval Snakemake workflow, customized
+│       │   ├── gather_subsample.R																As per scclusteval Snakemake workflow, customized	
+│       │   ├── preprocess.R																	As per scclusteval Snakemake workflow, customized
+│       │   └── subsample.R																		As per scclusteval Snakemake workflow, customized
+│       ├── Snakefile																			As per scclusteval Snakemake workflow, customized
+├── 4_Finalized_cluster_QC_annotation															Methods sections: Cluster annotation, Comparison to other datasets 
+│   ├── bash_files																				Contains the bash scripts used to submit R scripts.
+│   │   ├── Step1.sh
+│   │   ├── Step2.sh
+│   │   ├── Step3.sh  
+│   │   ├── Step5_R4.1.sh
+│   │   └── Step6.sh
+│   ├── Finalized_scripts
+│   │   ├── 1_cluster_QC.R																		Basic QC of clustering results
+│   │   ├── 2_cluster_annotation.R																Evaluation of marker genes, and other approaches for cluster annotation
+│   │   ├── 3_cluster_matching.R																Matching of cluster with published data
+│   │   ├── 5_R4.1_spatial_matching.R															Preparation of published spatial dataset 
+│   │   └── 6_cluster_naming.R																	Naming of clusters based on annotation evaluation, additional house-keeping
+├── 5_Finalized_downstream_analysis																Methods sections: Cell type proportions comparison, Pseudotime trajectory analysis
+│   ├── bash_files																				Contains the bash scripts used to submit R scripts.
+│   │   ├── Step1.3.1.sh
+│   │   ├── Step1.3.sh
+│   │   ├── Step2.1.sh
+│   │   ├── Step2.sh
+│   │   ├── Step3.4.sh
+│   │   ├── Step3.5.sh   
+│   │   └── Step4.sh
+│   ├── Finalized_scripts
+│   │   ├── 1.3.1_morabito_proportions.R														Sub-sampling assessment of cell type proportion differences 
+│   │   ├── 1.3_celltype_props_case_control.R													Wilcoxon assesssment of cell type proportion differences	
+│   │   ├── 2.1_pseudotime_evaluate_models.R													Fit OL marker genes to pseudotime using different models, per sex
+│   │   ├── 2_pseudotime_comparison.R															Create pseudotime trajectory for OL
+│   │   ├── 3.4_spatial_reverse_label_transfer.R												Predict coritcal layer of nuclei based on spatial dataset
+│   │   ├── 3.5_readd_stability_info.R															House-keeping
+│   │   └── 4_cluster_markers_plots.R															Plots of cluster marker genes 
+├── 6_Differential_expression																	Methods sections: Differential expression analysis	
+│   ├── 00_Scripts
+│   │   ├── 01_Male_pseudobulk_edgeR_cell_subtype.R												Differential expression analysis with muscat for male clusters
+│   │   ├── 02_Male_pseudobulk_edgeR_cell_Broad.R												Differential expression analysis with muscat for male broad cell types
+│   │   ├── 03_Female_pseudobulk_edgeR_cell_subtype.R											Differential expression analysis with muscat for female clusters
+│   │   └── 04_Female_pseudobulk_edgeR_cell_broad.R												Differential expression analysis with muscat for female broad cell types
+│   └── Table_loop_parameters_Male.csv															Example file for selecting differential expression parameters
+├── 7_RRHO_analysis																				Methods sections: Comparison of male and female results
+│   └── Redone_RRHO
+│       ├── run_RROH2_per_clusterID_sample_2022.04.17.R											Rank-rank hypergeometric overlap analysis per cluster and broad cell type
+│       └── submission_RRHO.sh																	Bash submission script for RRHO	
+├── 8_Finalized_interpretation																	Methods sections: Differential expression analysis, Functional interpretation of female differential expression results, Comparison of male and female results	
+│   ├── bash_files																				Contains the bash scripts used to submit R scripts.
+│   │   ├── Step1.1.sh
+│   │   ├── Step12.sh
+│   │   ├── Step15.sh
+│   │   ├── Step1.9.sh
+│   │   ├── Step1.sh
+│   │   ├── Step3.2.sh
+│   │   ├── Step4.2.sh
+│   │   ├── Step6.sh
+│   │   ├── Step7.sh
+│   │   ├── Step8.sh
+│   │   ├── Step9.sh
+│   │   └── Step1.7.sh
+│   └──Finalized_scripts
+│      ├── 1.1_fgsea.R																			Run Gene Set Enrichment Analysis on differential expression results
+│      ├── 12_CellChat_Mic_PV.R																	Run CellChat on female microglia and PV interneurons
+│      ├── 14_selected_heatmaps.R																Heatmaps for DEGs in top female clusters
+│      ├── 15_combined_matrix_for_GEO.R															Script to output GEO matrix and UCSC Cell rowser matrix
+│      ├── 1.9_PsyGeNET.R																		Script to run PsyGeNET analysis on DEGs	
+│      ├── 1_refiltering_DEGs.R																	Refine list of DEGs 	
+│      ├── 3.2_logFC_corrs_old_data.R															Compare male results to previous analysis of the same data	
+│      ├── 4.2_microglia_thorough_reclustering.R												Re-run differential expression after sub-clustering female microglia
+│      ├── 6_UMAP_QC.R																			Make good quality plots 
+│      ├── 7_FGSEA_selected_stats.R																Collapse gene set enrichment results (Reactome pathway) for top female clusters
+│      ├── 8_per_subject_per_cluster_stats.R													Per subject (library) and cluster metrics
+│      ├── 9_p_combination.R																	Metanalysis of male and female differential expression
+│      └── 1.7_per_subject_DEG_violins.R                  										Make histograms with distributions of DEGs per analysis, make boxplots (not included in publication)
+├── 9_Local_plotting																			Figures: 2-6
+│   ├── alternatives_to_pies.R																	Figures: 2a,3a-d,4a & 4c
+│   ├──	make_graphs.R																			Figures: 5d, 6f
+│   └──	pies.R																			  Figures: 4b
+├── 10_WGCNA																					Methods sections: Weighted gene co-expression network analysis (WGCNA)	
+│   ├── Geneset_Moduleenrichment_InN.R
+│   ├── Geneset_Moduleenrichment_Mic.R
+│   ├── wgcna_InN.R
+│   └──	wgcna_Mic.R
+├── 11_Permutation_analysis																		Methods sections: Permutation analysis
+│   ├──bash_files 																				Contains the bash scripts used to submit R scripts.
+│   │  ├── Step1.sh
+│   │  ├── Step2.sh	
+│   │  ├── Step3.sh
+│   │  ├── Step4.sh
+│   │  ├── Step5.sh			
+│   │  └── Step8.sh	
+│   └──submisssion_male.sh
+│   └──submisssion_female.sh
+│   └──Finalized_scripts
+│      ├──1_male_subtype.R																		Script for running differential expression analysis on male clusters with permuted labels 
+│      ├──2_male_broad.R																		Script for running differential expression analysis on male broad cell types with permuted labels
+│      ├──3_female_subtype.R																	Script for running differential expression analysis on female clusters with permuted labels
+│      ├──4_female_broad.R																		Script for running differential expression analysis on female broad cell types with permuted labels
+│      ├──5_Plot_dists_genes_clusters_overlaps.R												Script for politting distributions of DEGs with real and permuted labels
+│      └──8_spearman_corrs_permuted.R															Script for running Spearman correlations between male and female differential expression results with permuted labels
+├── 12_Followup_analyses
+│   ├──bash_files 																				Contains the bash scripts used to submit R scripts.
+│   │  ├── Step16.sh
+│   │  ├── Step17.sh	
+│   │  └── Step2.sh	
+│   └──Finalized_scripts
+│      ├──16_pseudotime_replots_source_data.R														Generate the source data for regenerated pseudotime gene expression plots				
+│      ├──17_scclust_eval_source_data.R																	Generate the source data for regenerated scclusteval and chooseR inspired plots 
+│      └──2_spearman_corrs.R                                            Scripts for running Spearman correlations between male and female differential results
+└── README
